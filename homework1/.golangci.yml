@@ -1,0 +1,13 @@
+linters-settings:
+  revive:
+    rules:
+      - name: empty-lines
+
+linters:
+  enable:
+    - revive
+    - bodyclose
+    - gocritic
+    - lll
+    - wsl
+    - gofmt

@@ -1,0 +1,16 @@
+repos:
+-   repo: https://github.com/tekwizely/pre-commit-golang
+
+    rev: v0.8.3 # change this to the latest version
+
+    hooks:
+     - id: go-fmt
+     - id: go-vet
+     - id: go-lint
+     - id: go-imports
+    #  - id: no-go-testing
+    #  - id: golangci-lint
+    #  - id: go-critic
+    #  - id: go-unit-tests
+    #  - id: go-build
+    #  - id: go-mod-tidy

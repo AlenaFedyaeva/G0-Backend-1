@@ -13,6 +13,15 @@ g b cource
  - Настравиваем pre-commit: создаем файл  .pre-commit-config.yaml, 
  - Запускаем "pre-commit install" для установки локальных хуков.
 
+3) Задание Github Actions
+ - В своем Github-репозитории создайте папку .github/workflows.
+ - для запуска golangci-lint  файл .github/workflows/lint.yml 
+ - для запуска pre-commit .github/workflows/pre-commit.yml 
+
+4) Makefile или Taskfile
+ - вызов make или go-task
+
+
 
 
 
@@ -23,4 +32,11 @@ http://tumregels.github.io/Network-Programming-with-Go/
  
 3) Многопользовательская игра на Go через telnet
 https://habr.com/ru/post/330512/
+
+4) Документация к утилите make: https://www.gnu.org/software/make/ 
+5) Пример работы с утилитой make для Go-разработчиков: https://blog.gopheracademy.com/advent-2017/make/ 
+6) Статья “Эффективное использование make”: http://www.opennet.ru/docs/RUS/gnumake/ 
+7) Готовим сборку Go-приложения в продакшн: https://habr.com/ru/post/337158/ 
+
+
 

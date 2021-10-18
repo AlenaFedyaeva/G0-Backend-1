@@ -1,4 +1,4 @@
-openapi: 3.1.1
+openapi: 3.0.0
 info:
   title: Shop
   version: 1.0.0
@@ -31,13 +31,54 @@ components:
             format: int64 
           image_link:
             type: string
+      Items:
+        type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/Item"
+
+      Order:
+        type: object
+        properties:
+          orderid:
+            type: integer
+            format: int64
+          userid:
+            type: integer
+            format: int64
+          items:
+            type: array
+            items:
+                $ref: "#/components/schemas/Item"
+          dtime:
+            type: string
+            format: date-time
+          shipDate:
+            type: "string"
+            format: "date-time" 
+          status:
+            type: "string"
+            description: "Order Status"
+            default: "none"
+            enum:
+            - "none"
+            - "placed"
+            - "approved"
+            - "delivered" 
+          completed: 
+            type: "boolean"
+            default: false  
+        xml:
+          name: "Order"
   securitySchemes:
     securityDefinitions:
       api_key:
         type: apiKey
         name: api_key
         in: "header"
-         
+        
 paths:
   /user/login:
     post:
@@ -80,26 +121,34 @@ paths:
           description: successful logout
           content: {}
   /items:
-    post:
-      summary: "Add a new item to the store"
-      operationId: "CreateItem"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Item object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/components/schemas/Item"
-      responses:
-        "405":
-        description: "Invalid input"
-      security:
-      - api_key: []
     get:
+        operationId: getItemsFiltered
+      tags: ['results']
+      parameters:
+      - name: price_min
+        in: query
+        description: Lower price limit
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: price_max
+        in: query
+        description: Upper price limit
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: "successful operation"
+          $ref: "#/components/schemas/Items"
+        "400":
+          description: "Invalid params"
+        
+ 
+    get:
+      description: Results users with their answers
       summary: Lists Items with filters
       operationId: ListItems
       parameters:
@@ -129,6 +178,27 @@ paths:
         400:
           description: Invalid price range
           content: {}
+        404:
+          description: "Items not found"
+    post:
+      summary: "Add a new item to the store"
+      operationId: "CreateItem"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Item object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/components/schemas/Item"
+      responses:
+        "405":
+        description: "Invalid input"
+      security:
+      - api_key: []
   /items/upload_image:
     post:
       summary: "uploads an image"

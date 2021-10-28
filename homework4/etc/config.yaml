@@ -1,0 +1,6 @@
+config:
+  Log: {_ref: {name: "HW_LOG", default: "error"}}
+  ListenAddr: {_ref: {name: "HW_LISTEN_ADDR", default: "localhost:8980"}}
+  PGAvailable : {_ref: {name: "HW_PG_AVAILABLE", default: "150m"}}
+  PGConnInfo: {_ref: {name: "HW_PG_CONN_INFO", default: "user=tmp dbname=shop password=mypass sslmode=disable"}}
+ 

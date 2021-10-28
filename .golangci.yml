@@ -1,0 +1,54 @@
+
+# настройки запуска
+run:
+  # значение конкурентности устанавливаем по количеству CPU
+  concurrency: 4
+  # анализ не должен превышать
+  timeout: 1m
+  # выводить "exit-code" при наличии хотя бы одного сообщения
+  issues-exit-code: 1
+  # не включать анализ тестов
+  tests: false
+  # Пропускать папки вендора, сторонних зависимостей и т.д.
+  # vendor$, third_party$, testdata$, examples$, Godeps$, builtin$
+  skip-dirs-use-default: true
+  # Пропускать файлы, заканчивающиеся на .bad.go
+  # skip-files:
+  #  - ".*\\.bad\\.go$
+
+# список линтеров
+linters:
+  enable:
+    - revive
+    - bodyclose
+    - gocritic
+    - lll
+    - wsl
+    - gofmt
+    - govet
+    - funlen
+    - errcheck
+    - goconst
+    - goimports
+
+
+#yастройки отдельных линтеров
+linters-settings:
+  revive:
+    rules:
+      - name: empty-lines
+  goimports:
+  # указываем префикс локальных импортов, они будут группироваться
+    local-prefixes: path/to/module
+  govet:
+  # проверка на использование переменных «в тени»
+    check-shadowing: true
+  goconst:
+  # goconst находит строки не меньше 2 символов, которые встречаются хотя бы 2раза
+    min-len: 2
+    min-occurrences: 2
+  funlen:
+  # функция помечается длинной если она больше 100 строк кода либо больше 50 операций
+    lines: 100
+    statements: 50
+  

@@ -3,6 +3,10 @@ g b cource
 
 # Подготовка репозитория согласно "Лучшим практикам GO"
 
+0) Настраиваем и устанавливаем direnv 
+https://direnv.net/docs/hook.html
+
+
 1) Линтеры
  - Устанавливаем golangci-lint
  - Настраиваем линтеры - пример .golangci.yaml 
